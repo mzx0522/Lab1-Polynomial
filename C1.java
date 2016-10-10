@@ -1,13 +1,13 @@
 package work1;
 import java.util.Scanner;
 public class C1 {
-	public static void Derivation(StringBuffer beforeD,String x)//Çóµ¼
+	public static void Derivation(StringBuffer beforeD,String x)//
 	{
 		StringBuffer afterD=new StringBuffer();
 		int count=0;
 		int i;
 		char item;
-		//ÕÒ³ö±äÁ¿²¢¼ÆÊý,Çó³ö´ÎÊý,²»ÊÇ±äÁ¿ÇÒ²»ÊÇ*¾Í¶ÁÈ¡
+		//
 		for(i=0;i<beforeD.length();i++)
 		{
 			item=beforeD.charAt(i);
@@ -20,11 +20,15 @@ public class C1 {
 				afterD.append(item);
 			}
 		}
-		if(count==0)//Èç¹û±äÁ¿´ÎÊýÎª0£¬Ôòµ¼ÊýÎªÁã
+		if(count==0)//
 		{
-			afterD.delete(0,afterD.length());
+			afterD.delete(0, afterD.length());
 		}
-		else if(count!=1)//´ÎÊýÎª1Ê±²»Êä³öÏµÊý
+		else if(count==1)
+		{
+			afterD.append("1");
+		}
+		else if(count!=1)//
 		{
 			afterD.append(Integer.toString(count));
 			for(i=0;i<count-1;i++)
@@ -32,23 +36,23 @@ public class C1 {
 				afterD.append(x);
 			}
 		}
-		//¶Ô½á¹ûÊ½×ÓÐÎÊ½µÄ´¦Àí
+		//
 		for(i=0;i<afterD.length()-1;i++)
 		{
-			//Êý×ÖºóÃæ¼ÓÉÏ³ËºÅ*
+			//
 			if(Character.isDigit(afterD.charAt(i))& !Character.isDigit(afterD.charAt(i+1)))
 			{
 				afterD.insert(i+1, '*');
 			}
-			//×ÖÄ¸±äÁ¿ºóÃæ¼ÓÉÏ³ËºÅ*,Èç¹ûÊÇ×ÖÄ¸ÇÒ²»ÊÇ×îºóÒ»Î»¾Í¼ÓÉÏ*
+			//
 			if(Character.isAlphabetic(afterD.charAt(i))&i!=afterD.length()-1)
 			{
 				afterD.insert(i+1, '*');
 			}
 		}
-		for(i=0;i<afterD.length();i++)
+		for(i=1;i<afterD.length();i++)
 		{
-			//É¾³ýÃ¿¸öµ¥ÏîÊ½Ä©Î²¶àÓàµÄ³ËºÅ
+			//
 			if(afterD.charAt(i)=='*'& i==afterD.length()-1)
 			{
 				afterD.deleteCharAt(i);
@@ -56,6 +60,7 @@ public class C1 {
 		}
 		System.out.print(afterD);
 	}
+//    public static void Simplify(StringBuffer str,String op)
 	public static void Analyst(StringBuffer str,String x)
 	{
 		int i;
@@ -75,40 +80,68 @@ public class C1 {
 				temp.append(item);
 			}	
 		}
+		System.out.println();
 	}
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		Scanner input = new Scanner(System.in);
-		StringBuffer str = new StringBuffer();
-		String fact,op;
-		System.out.println("ÇëÊäÈë¶àÏîÊ½:");
-		System.out.println("±äÁ¿²»¿É³¬¹ýÈý¸öÇÒ±ØÐëÎª:x,y,z");
-		str.append(input.next());
-		System.out.println("ÄúÊäÈëµÄ¶àÏîÊ½ÊÇ:");
-		System.out.println(str);
-		op=input.next();
-		if(op.contains("simplify"))
+		StringBuffer str1= new StringBuffer(), str2 = new StringBuffer();
+		String fact,op,fu;
+		int i=0,a=0;
+		System.out.println("ç’‡ç–¯ç·­éãƒ¥î˜¿æ¤¤ç‘°ç´¡:");
+		System.out.println("é™æ©€å™ºæ¶“å¶…å½²ç“’å‘°ç¹ƒæ¶“å¤‰é‡œæ¶“æ–¿ç¹€æ¤¤è®³è´Ÿ:x,y,z");
+		str1.append(input.next());
+		str2.append(str1);
+		op=str2.toString();
+		while(!op.contains("a"))
 		{
-			System.out.println("0");
-		}
-		else if(op.contains("d/d"))
-		{
-			fact=input.next();
-			if(str.indexOf(fact)!=-1)
+			if(op.contains("simplify"))
 			{
-				System.out.println("Çóµ¼½á¹ûÎª:");
-				Analyst(str,fact);
+				for(i=1;i<4;i++)
+				{
+					fu=input.next();
+					if(fu!=null)
+					{
+						for(a=0;a<str1.length();a++)
+						{
+							if(str1.charAt(a)==fu.charAt(0))
+							{
+								str1.replace(a,a+1, fu.substring(2, fu.length()));
+							}
+						}
+						System.out.println(str1);
+						//Simplify(str1,fu);
+					}
+					else{
+						System.out.println(str1);
+					}
+				}
+			}
+			else if(op.contains("d/d"))
+			{
+				fact=input.next();
+				if(str1.indexOf(fact)!=-1)
+				{
+					System.out.println("å§¹å‚šî‡±ç¼æ’´ç‰æ¶“ï¿½:");
+					Analyst(str1,fact);
+				}
+				else
+				{
+					System.out.println("ERROR,No variable");
+				}
 			}
 			else
 			{
-				System.out.println("ERROR,No variable");
+				str1.delete(0,str1.length());
+				str1.append(str2);
+				System.out.println("éŽ®ã„¨ç·­éãƒ§æ®‘æ¾¶æ°¶ã€å¯®å¿”æ§¸:");
+				System.out.println(str1);
 			}
-		}
-		else
-		{
-			System.out.println("ÄúÊäÈëµÄ¶àÏîÊ½ÊÇ:");
-			System.out.println(str);
+			str2.delete(0, str2.length());
+			str2.append(input.next());
+			op=str2.toString();
 		}
 		input.close();
+		System.exit(0);
 	}
 }

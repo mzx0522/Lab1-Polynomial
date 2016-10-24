@@ -28,13 +28,12 @@ public class Main {
                 afterD.append(x);
             }
         }
-        //
         for (i = 0; i < afterD.length() - 1; i++) {
-            //
+
             if (Character.isDigit(afterD.charAt(i)) & !Character.isDigit(afterD.charAt(i + 1))) {
                 afterD.insert(i + 1, '*');
             }
-            //
+
             if (Character.isAlphabetic(afterD.charAt(i)) & i != afterD.length() - 1) {
                 afterD.insert(i + 1, '*');
             }
@@ -48,7 +47,6 @@ public class Main {
         System.out.print(afterD);
     }
 
-    //    public static void Simplify(StringBuffer str,String op)
     public static void Analyst(StringBuffer str, String x) {
         int i;
         char item;
